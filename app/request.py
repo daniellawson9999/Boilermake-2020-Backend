@@ -2,26 +2,31 @@ import requests
 import re
 import json
 
-url = 'https://www.bbc.com/news/world-us-canada-51253066'
-API_ENDPOINT = "https://api.diffbot.com/v3/article"
 
-ttl = {'token':'3e30c795c4208bafafb20aec78f9ccc1',
-         'url':  url}
+def make_request(url = 'https://www.bbc.com/news/world-us-canada-51253066'):
+    API_ENDPOINT = "https://api.diffbot.com/v3/article"
 
-r = requests.get(API_ENDPOINT, params = ttl) 
-api_response = r.content
+    ttl = {'token':'3e30c795c4208bafafb20aec78f9ccc1',
+            'url':  url}
 
-try:
-    title1 = json.loads(api_response)['objects'][0]['title']
-except:
-    title1 = 'no title found'
+    r = requests.get(API_ENDPOINT, params = ttl) 
+    api_response = r.content
 
-try:
-    author1 = json.loads(api_response)['objects'][0]['author']
-except:
-    author1 = 'no author found'
+    try:
+        title1 = json.loads(api_response)['objects'][0]['title']
+    except:
+        title1 = 'no title found'
 
-txt = json.loads(api_response)['objects'][0]['text']
-print(title1)
-print(author1)
-print(txt)
+    try:
+        author1 = json.loads(api_response)['objects'][0]['author']
+    except:
+        author1 = 'no author found'
+
+    txt = json.loads(api_response)['objects'][0]['text']
+    return title1, author1, txt
+
+if __name__ = "__main__":
+    title1, author1, txt = make_request()
+    print(title1)
+    print(author1)
+    print(txt)
