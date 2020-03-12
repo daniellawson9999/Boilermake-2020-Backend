@@ -23,7 +23,8 @@ def detect_url():
 
 def save_time()
     date, time = datetime.now().strftime('%D %H:%M:%S').split(' ')
-    db = client.test_data
+    db = client.test
+# not done handling the databse
 
 # params: text:
 @app.route('/detect/text', methods = ['POST'])
